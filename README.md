@@ -313,7 +313,7 @@ UPDATE name_table SET field1=’valuenew’
 DELETE FROM name_table [WHERE kondisi];
 ```
 
-# DCL (Data Control Language)
+# Data Control Language
 
 ```mysql
 GRANT priv_type

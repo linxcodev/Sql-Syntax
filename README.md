@@ -5,15 +5,25 @@ this is my note for learning mysql
 
 1. MyISAM
     - MyISAM static
-    > This type is used when all the columns are in the table defined by a fixed size.
+    ```
+    This type is used when all the columns are in the table defined by a fixed size.
+    ```
     - MyISAM DYNAMIC
-    > This type is used when there are columns with type which is dynamic, like the VARCHAR column type.
+    ```
+    This type is used when there are columns with type which is dynamic, like the VARCHAR column type.
+    ```
     - MyISAM Compressed
-    > The uncompressed table can not be subjected to operations such as INSERT, UPDATE and DELETE.
+    ```
+    The uncompressed table can not be subjected to operations such as INSERT, UPDATE and DELETE.
+    ```
 2. InnoDB
-    > table types that support the process transaction.
+    ```
+    table types that support the process transaction.
+    ```
 3. HEAP
-    > Table for trying, because this table save in memory when server shutdown or connection is disconnected this table will lose.
+    ```
+    Table for trying, because this table save in memory when server shutdown or connection is disconnected this table will lose.
+    ```
 
 ## Type field in mysql
 
@@ -218,7 +228,7 @@ SET field1=’value1’, field2=’value2’,...;
 ```
 
 ### Showing Value Table
-```
+```mysql
 SELECT [field | *] FROM nama_tabel [WHERE kondisi];
 or
 SELECT id_pelanggan, nm_pelanggan, email
@@ -236,7 +246,7 @@ FROM pelanggan ORDER BY nm_pelanggan LIMIT 0,3;
 ```
 
 ### INNER Join
-```
+```mysql
 SELECT tabel1.*, tabel2.* FROM tabel1, tabel2
 WHERE tabel1.PK=tabel2.FK;
 
@@ -246,7 +256,7 @@ ON tabel1.PK=tabel2.FK;
 ```
 
 ### OUTER Join
-```
+```mysql
 SELECT tabel1.*, tabel2.*
 FROM tabel1 LEFT JOIN tabel2
 ON tabel1.PK=tabel2.FK;
@@ -257,7 +267,7 @@ ON tabel1.PK=tabel2.FK;
 ```
 
 ### Example 3 table
-```
+```mysql
 SELECT pesan.id_pesan, produk.id_produk, produk.nm_produk,
 detil_pesan.harga, detil_pesan.jumlah
 FROM pesan, detil_pesan, produk
@@ -267,7 +277,7 @@ AND pesan.id_pesan='1';
 ```
 
 ### GROUP BY
-```
+```mysql
 SELECT pesan.id_pesan, pesan.tgl_pesan,
 SUM(detil_pesan.jumlah) as jumlah
 FROM pesan, detil_pesan
@@ -276,7 +286,7 @@ GROUP BY id_pesan;
 ```
 
 ### Having
-```
+```mysql
 SELECT pesan.id_pesan, COUNT(detil_pesan.id_produk) as
 jumlah
 FROM pesan, detil_pesan
@@ -286,26 +296,26 @@ HAVING jumlah > 2;
 ```
 
 ### subSelect
-```
+```mysql
 SELECT id_pelanggan, nm_pelanggan FROM pelanggan
 WHERE id_pelanggan IN (SELECT id_pelanggan FROM
 pesan);
 ```
 
 ### Update Value Table
-```
+```mysql
 UPDATE name_table SET field1=’valuenew’
 [WHERE kondisi];
 ```
 
 ### Delete Value
-```
+```mysql
 DELETE FROM name_table [WHERE kondisi];
 ```
 
 # DCL (Data Control Language)
 
-```
+```mysql
 GRANT priv_type
 ON {tbl_name | * | *.* | db_name.*}
 TO user_name [IDENTIFIED BY 'password']
@@ -325,19 +335,19 @@ FROM user_name
 |DROP|REFERENCES|USAGE|
 
 ### Show
-```
+```mysql
 SHOW GRANTS;
 
 SHOW GRANTS FOR 'username';
 ```
 
 ### Drop
-```
+```mysql
 DROP USER 'jeffrey'@'localhost'
 ```
 
 # Triggers
-```
+```mysql
 CREATE TRIGGER name
 [BEFORE|AFTER] [INSERT|UPDATE|DELETE]
 ON tablename
@@ -345,7 +355,7 @@ FOR EACH ROW statement
 ```
 
 ### Example
-```
+```mysql
 DELIMITER $$
 CREATE TRIGGER penjualan.before_insert BEFORE INSERT ON
 penjualan.pelanggan
@@ -359,17 +369,17 @@ DELIMITER ;
 ```
 
 ### Show
-```
+```mysql
 show triggers;
 ```
 
 ### Drop
-```
+```mysql
 DROP TRIGGER tablename.triggername;
 ```
 
 # View
-```
+```mysql
 CREATE
 [OR REPLACE]
 [ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
@@ -381,7 +391,7 @@ AS select_statement
 ```
 
 ### example
-```
+```mysql
 CREATE VIEW lap_jumlah_brg_transaksi
 AS
 (SELECT pesan.id_pesan, pesan.tgl_pesan,
@@ -394,248 +404,248 @@ GROUP BY pesan.id_pesan)
 ```
 
 ### Call
-```
+```mysql
 SELECT * FROM lap_jumlah_brg_transaksi;
 ```
 
 ### Change
-```
+```mysql
 ALTER
 [ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
 [DEFINER = { user | CURRENT_USER }]
 ```
 
 ### Delete
-```
+```mysql
 DROP VIEW view_name;
 ```
 
 ### Show Create View
-```
+```mysql
 show create view nameview;
 ```
 
 
 # Function Mysql String
 - CONCAT (str1, str2, ...)
-```
+```mysql
 SELECT nm_pelanggan, CONCAT(alamat,' ',telepon)
 FROM pelanggan;
 ```
 
 - CONCAT_WS (separator, str1, str2, ...)
-```
+```mysql
 SELECT CONCAT_WS (',','Adi','Ida','Edi');
 ```
 
 - SUBSTRING (string FROM FOR)
-```
+```mysql
 SELECT SUBSTRING ('Linxcodev',1,4);
 ```
 
 - LENGTH (string)
-```
+```mysql
 SELECT LENGTH ('Linxcodev');
 ```
 
 - LEFT (string, panjang)
-```
+```mysql
 SELECT LEFT ('Linx Codev', 4);
 ```
 
 - RIGHT (string, panjang)
-```
+```mysql
 SELECT LEFT ('Linx Codev', 4);
 ```
 
 - LTRIM (string)  
-```
+```mysql
 SELECT LENGTH (' Linxcodev');
 ```
 
 - RTRIM (string)  
-```
+```mysql
 SELECT LENGTH ('Linxcodev ');
 ```
 
 - TRIM (string)
-```
+```mysql
 SELECT LENGTH (' Linxcodev ');
 ```
 
 - REPLACE (string, from_str, to_str)
-```
+```mysql
 SELECT REPLACE ('www.mysql.com', 'w', 'j' );
 ```
 
 - REPEAT (string, jumlah)
-```
+```mysql
 SELECT REPEAT ('Mont', 3);
 ```
 
 - REVERSE (string)
-```
+```mysql
 SELECT REVERSE ('mysql.com');
 ```
 
 - LOWER (string)
-```
+```mysql
 SELECT LOWER ('MySQL');
 ```
 
 - UPPER (string)
-```
+```mysql
 SELECT UPPER ('mysql');
 ```
 
 # Function Mysql Date and Time
 - NOW ()
-```
+```mysql
 SELECT NOW();
 ```
 
 - MONTH (date)
-```
+```mysql
 SELECT MONTH (‘1982-06-05’);
 ```
 
 - WEEK (date)
-```
+```mysql
 SELECT WEEK (‘1982-06-05’);
 ```
 
 - YEAR (date)
-```
+```mysql
 SELECT YEAR (now());
 ```
 
 - HOUR (time)
-```
+```mysql
 SELECT HOUR (now());
 ```
 
 - MINUTE (time)
-```
+```mysql
 SELECT MINUTE (now());
 ```
 
 - SECOND (time)
-```
+```mysql
 SELECT SECOND (now());
 ```
 
 - TIME_FORMAT(time, format)
-```
+```mysql
 SELECT DATE_FORMAT (now(), '%d-%M-%Y %H:%i:%s');
 ```
 
 # Function Numeric
 - OPERATION ARITMATIKA
-```
+```mysql
 SELECT 10+20;
 ```
 
 - ABS(x)
-```
+```mysql
 SELECT ABS(-20);
 ```
 
 - MOD(m, n)
-```
+```mysql
 SELECT MOD(10,3);
 ```
 
 - ROUND (x, d)
-```
+```mysql
 SELECT ROUND(10.3576, 2);
 SELECT FLOOR(10.3576);
 SELECT CEILING(10.3576);
 ```
 
 - POW (x, n)
-```
+```mysql
 SELECT POW(2, 10);
 ```
 
 - RAND();
-```
+```mysql
 SELECT RAND();
 ```
 
 - TRUNCATE(x, d)
-```
+```mysql
 SELECT TRUNCATE(10.28372, 1);
 ```
 
 # Etc
 
 - GREATEST(nil1, nil2, ...)
-```
+```mysql
 SELECT GREATEST(2,5,2,6,3,7,4,2,5,1);
 ```
 
 - COUNT(*)
-```
+```mysql
 SELECT COUNT(*) FROM pelanggan;
 ```
 
 - MAX(range)
-```
+```mysql
 SELECT MAX(field) FROM nilai_ujian;
 ```
 
 - MIN(range)
-```
+```mysql
 SELECT MAX(field) FROM nilai_ujian; 
 ```
 
 - SUM(range)
-```
+```mysql
 SELECT SUM(field) FROM nilai_ujian;
 ```
 
 - AVG(range)
-```
+```mysql
 SELECT AVG(field) FROM nilai_ujian;
 ```
 
 - DATABASE()
-```
+```mysql
 SELECT DATABASE();
 ```
 
 - USER()
-```
+```mysql
 SELECT USER();
 ```
 
 - PASSWORD(str)
-```
+```mysql
 SELECT PASSWORD('qwerty');
 ```
 
 - ENCODE(str, pass)
-```
+```mysql
 SELECT ENCODE('qwerty', 'password');
 ```
 
 - DECODE(encripted_str, pass)
-```
+```mysql
 SELECT DECODE('câ┬♠e|', 'password');
 ```
 
 - MD5(str);
-```
+```mysql
 SELECT MD5('qwerty');
 ```
 
 - VERSION()
-```
+```mysql
 SELECT VERSION();
 ```
 
 # Function and Procedure
-``` 
+``` mysql
 CREATE
 [DEFINER = { user | CURRENT_USER }]
 PROCEDURE sp_name ([proc_parameter[,...]])
@@ -649,12 +659,12 @@ RETURNS type
 ```
 
 ### Show List
-```
+```mysql
 SHOW [function | procedure] STATUS WHERE Db = 'nmDB';
 ```
 
 ### Create procedure
-```
+```mysql
 DELIMITER $$
 CREATE PROCEDURE hello()
 BEGIN
@@ -664,12 +674,12 @@ DELIMITER ;
 ```
 
 ### Call procedure
-```
+```mysql
 CALL hello();
 ```
 
 ### Example
-```
+```mysql
 DELIMITER $$
 CREATE PROCEDURE jumlahPelanggan2(OUT hasil AS INT)
 BEGIN
@@ -677,7 +687,7 @@ SELECT COUNT(*) INTO hasil FROM pelanggan;
 END$$
 DELIMITER ;
 ```
-```
+```mysql
 mysql> CALL jumlahPelanggan2(@jumlah);
 Query OK, 0 rows affected (0.00 sec)
 mysql> SELECT @jumlah AS `Jumlah Pelanggan`;
@@ -690,12 +700,12 @@ mysql> SELECT @jumlah AS `Jumlah Pelanggan`;
 ```
 
 ### Show Proc
-```
+```mysql
 SHOW CREATE PROCEDURE proc_name
 ```
 
 ### Create Function
-```
+```mysql
 DELIMITER $$
 CREATE FUNCTION jumlahStockBarang(produk VARCHAR(5))
 RETURNS INT
@@ -707,7 +717,7 @@ RETURN jumlah;
 END$$
 DELIMITER ;
 ```
-```
+```mysql
 SELECT jumlahStockBarang('B0001');
 
 +----------------------------+
@@ -718,18 +728,18 @@ SELECT jumlahStockBarang('B0001');
 ```
 
 ### Change
-```
+```mysql
 ALTER {PROCEDURE | FUNCTION} sp_name
 [characteristic ...]
 ```
 
 ### Drop
-```
+```mysql
 DROP {PROCEDURE | FUNCTION} [IF EXISTS] sp_name
 ```
 
 # Export Data Mysql
-```
+```mysql
 mysqldump -u [uname] -p db_name > db_backup.sql
 
 mysqldump -u [uname] -p --all-databases > all_db_backup.sql
@@ -738,6 +748,6 @@ mysqldump -u [uname] -p db_name table1 table2 > table_backup.sql
 ```
 
 # Import Data Mysql
-```
+```mysql
 mysql -u username -p -h localhost DATA-BASE-NAME < data.sql
 ```
